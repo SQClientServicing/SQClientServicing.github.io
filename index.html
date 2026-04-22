@@ -1,0 +1,2112 @@
+<!DOCTYPE html>
+<!-- saved from url=(0079)file:///Users/sanjana/Downloads/Creative_Builder_Pro_revised_fixed_preview.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Creative Builder Pro</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+  <link href="file:///Users/sanjana/Downloads/Creative%20Builder%20Pro_1929_files/css2" rel="stylesheet">
+
+  <script src="file:///Users/sanjana/Downloads/Creative%20Builder%20Pro_1929_files/piexif.min.js"></script>
+  <script src="file:///Users/sanjana/Downloads/Creative%20Builder%20Pro_1929_files/jszip.min.js"></script>
+  <script src="file:///Users/sanjana/Downloads/Creative%20Builder%20Pro_1929_files/jspdf.umd.min.js"></script>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
+  <style>
+    :root{
+      --bg:#060707;
+      --bg-2:#0d0f10;
+      --panel:#121416;
+      --panel-2:#181b1f;
+      --text:#f4f4f2;
+      --muted:#9ea3aa;
+      --accent:#f4c742;
+      --accent-2:#f0b90b;
+      --stage-bg:#090b0c;
+      --border:rgba(255,255,255,.08);
+      --soft-border:rgba(255,255,255,.12);
+      --chip:#17191d;
+      --header-h:82px;
+      --shadow:0 18px 40px rgba(0,0,0,.35);
+    }
+
+    *{
+      box-sizing:border-box;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+    }
+
+    html, body{
+      height:100%;
+    }
+
+    body{
+      margin:0;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(255,255,255,.05), transparent 28%),
+        radial-gradient(circle at 80% 20%, rgba(244,199,66,.06), transparent 20%),
+        linear-gradient(180deg, #060707 0%, #0a0c0d 100%);
+      color:var(--text);
+      overflow:hidden;
+    }
+
+    header{
+      padding:18px 20px;
+      border-bottom:1px solid rgba(255,255,255,.06);
+      height:var(--header-h);
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
+      backdrop-filter:blur(8px);
+    }
+
+    header h1{
+      margin:0;
+      font-size:16px;
+      letter-spacing:.2px;
+    }
+
+    header p{
+      margin:6px 0 0;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.4;
+    }
+
+    .wrap{
+      display:grid;
+      grid-template-columns:70% 30%;
+      gap:16px;
+      padding:16px;
+      height:calc(100vh - var(--header-h));
+      min-height:0;
+    }
+
+    .panel, .stageWrap{
+      min-height:0;
+    }
+
+    .panel{
+      background:linear-gradient(180deg, rgba(24,27,31,.96), rgba(16,18,21,.96));
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:26px;
+      padding:18px;
+      overflow-y:auto;
+      overflow-x:hidden;
+      height:100%;
+      scrollbar-gutter:stable;
+      box-shadow:var(--shadow);
+    }
+
+    .panel h2{
+      margin:0 0 10px;
+      font-size:13px;
+      color:var(--muted);
+      font-weight:600;
+      letter-spacing:.35px;
+      text-transform:uppercase;
+    }
+
+    label{
+      display:block;
+      font-size:12px;
+      color:var(--muted);
+      margin:10px 0 6px;
+    }
+
+    .row{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-bottom:10px;
+    }
+
+    .row3{
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      gap:10px;
+      margin-bottom:10px;
+    }
+
+    .copyBlock{
+      margin-bottom:10px;
+    }
+
+    .copyTop{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin:10px 0 6px;
+    }
+
+    .copyTop label{
+      margin:0;
+    }
+
+    .miniTools{
+      display:flex;
+      gap:6px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    .iconBtn{
+      width:28px;
+      height:28px;
+      min-width:28px;
+      padding:0;
+      border-radius:8px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      font-size:12px;
+      line-height:1;
+    }
+
+    .iconBtn.active{
+      background:rgba(244,199,66,.22);
+      border-color:rgba(244,199,66,.45);
+      color:#fff;
+    }
+
+    .rowTight{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-bottom:0;
+    }
+
+    input[type="number"],
+    input[type="text"],
+    textarea,
+    select,
+    input[type="range"]{
+      width:100%;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.02));
+      color:var(--text);
+      padding:12px 12px;
+      outline:none;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.03);
+    }
+
+    textarea{
+      resize:vertical;
+      min-height:70px;
+    }
+
+    input[type="number"]:focus,
+    input[type="text"]:focus,
+    textarea:focus,
+    select:focus{
+      border-color:rgba(244,199,66,.35);
+      box-shadow:0 0 0 3px rgba(244,199,66,.08), inset 0 1px 0 rgba(255,255,255,.03);
+    }
+
+
+    input[type="range"]{
+      padding:10px;
+    }
+
+    input[type="file"]{
+      width:100%;
+      color:var(--muted);
+    }
+
+    .btns{
+      display:flex;
+      gap:10px;
+      margin-top:12px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    button{
+      border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg, #1a1d21 0%, #121417 100%);
+      color:var(--text);
+      padding:11px 14px;
+      border-radius:999px;
+      cursor:pointer;
+      font-weight:600;
+      font-size:12px;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.04), 0 10px 22px rgba(0,0,0,.22);
+      transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+    }
+
+    button.primary{
+      background:linear-gradient(180deg, #ffd452 0%, #efbf2d 100%);
+      color:#17140b;
+      border-color:rgba(255,214,100,.55);
+    }
+
+    button:hover{
+      border-color:rgba(255,255,255,.15);
+    }
+
+    button:active{
+      transform:translateY(1px) scale(.995);
+    }
+
+    .lockedBadge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:10px 12px;
+      background:rgba(255,255,255,.035);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:16px;
+      color:#d5d7db;
+      font-size:12px;
+      margin-top:8px;
+    }
+
+    .toggleRow{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin:8px 0 2px;
+      padding:12px 14px;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.03);
+    }
+
+    .toggleRow span{
+      font-size:12px;
+      color:var(--text);
+      font-weight:600;
+    }
+
+    .switch{
+      position:relative;
+      display:inline-block;
+      width:48px;
+      height:28px;
+      flex:0 0 auto;
+    }
+
+    .switch input{
+      opacity:0;
+      width:0;
+      height:0;
+    }
+
+    .slider{
+      position:absolute;
+      cursor:pointer;
+      inset:0;
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.08);
+      transition:.2s;
+      border-radius:999px;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.03);
+    }
+
+    .slider:before{
+      content:"";
+      position:absolute;
+      height:20px;
+      width:20px;
+      left:3px;
+      top:3px;
+      background:white;
+      transition:.2s;
+      border-radius:50%;
+    }
+
+    .switch input:checked + .slider{
+      background:rgba(244,199,66,.38);
+      border-color:rgba(244,199,66,.42);
+    }
+
+    .switch input:checked + .slider:before{
+      transform:translateX(20px);
+    }
+
+    .hidden{
+      display:none !important;
+    }
+
+    .stageWrap{
+      background:linear-gradient(180deg, rgba(18,20,22,.96), rgba(12,13,15,.96));
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:26px;
+      padding:16px;
+      height:100%;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      box-shadow:var(--shadow);
+    }
+
+    .stageTop{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .hint{
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    .stage{
+      flex:1;
+      min-height:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(255,255,255,.04), transparent 25%),
+        linear-gradient(180deg, #090b0c 0%, #060707 100%);
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.06);
+      padding:16px;
+      overflow:hidden;
+      position:relative;
+    }
+
+    .stage canvas{
+      display:block;
+      max-width:100%;
+      max-height:100%;
+      width:auto;
+      height:auto;
+      box-shadow:0 10px 30px rgba(0,0,0,.2);
+      border-radius:10px;
+    }
+
+    .subtle{
+      font-size:12px;
+      color:var(--muted);
+      margin-top:10px;
+      line-height:1.35;
+    }
+
+    .divider{
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,.10), transparent);
+      margin:14px 0;
+    }
+
+    .nudgeGrid{
+      display:grid;
+      grid-template-columns:42px 42px 42px;
+      grid-template-rows:42px 42px 42px;
+      gap:8px;
+      align-items:center;
+      justify-content:start;
+      margin-top:10px;
+    }
+
+    .nbtn{
+      width:42px;
+      height:42px;
+      border-radius:14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:16px;
+      user-select:none;
+    }
+
+    @media (max-width:1100px){
+      .wrap{
+        grid-template-columns:64% 36%;
+      }
+    }
+
+    @media (max-width:900px){
+      body{
+        overflow:auto;
+      }
+
+      .wrap{
+        grid-template-columns:1fr;
+        height:auto;
+      }
+
+      .panel{
+        height:auto;
+        overflow:visible;
+      }
+
+      .stageWrap{
+        min-height:70vh;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <h1>Creative Builder Pro</h1>
+  
+</header>
+
+<div class="wrap">
+  <div class="stageWrap">
+    <div class="stageTop">
+      <div class="hint">Preview</div>
+      <div class="hint" id="dimHint">1080 × 1920px</div>
+    </div>
+    <div class="stage" id="stage">
+      <canvas id="canvas" width="1080" height="1920" style="width: 370px; height: 657px;"></canvas>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>Preset + Defaults</h2>
+
+    <label>Preset size</label>
+    <select id="preset">
+      <option value="960x540">App banner (960 × 540)</option>
+      <option value="864x1700">Notification (864 × 1700)</option>
+      <option value="1080x1920" selected="">Digital standee (1080 × 1920)</option>
+      <option value="1920x1080">TV creative (1920 × 1080)</option>
+      <option value="400x700">Ad banner (400 × 700)</option>
+    </select>
+
+    <div class="toggleRow">
+      <span>Preset layout</span>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span id="layoutLockIcon">🔒</span>
+        <label class="switch">
+          <input type="checkbox" id="unlockLayoutControls">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <div id="layoutControls" class="hidden">
+      <div class="rowTight">
+        <div>
+          <label>Default style</label>
+          <select id="defaultStyleMode" disabled="">
+            <option value="auto" selected="">Auto apply on preset change</option>
+            <option value="manual">Manual (don’t overwrite my sizes)</option>
+          </select>
+        </div>
+        <div class="btns" style="margin-top:22px;">
+          <button id="applyDefaults" disabled="">Apply preset defaults now</button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div><label>Width</label><input id="w" type="number" min="50" value="1080" disabled=""></div>
+        <div><label>Height</label><input id="h" type="number" min="50" value="1920" disabled=""></div>
+      </div>
+
+      <label>Template</label>
+      <select id="template" disabled="">
+        <option value="auto" selected="">Auto (based on preset)</option>
+        <option value="side">Side-by-side (text left, image right)</option>
+        <option value="stack">Stacked (logo, header, image, body, CTA)</option>
+      </select>
+
+      <label>Text alignment</label>
+      <select id="align" disabled="">
+        <option value="left">Left</option>
+        <option value="center" selected="">Center</option>
+        <option value="right">Right</option>
+      </select>
+    </div>
+
+    <div class="divider"></div>
+
+    <h2>Background</h2>
+
+    <label>Upload background</label>
+    <input id="bgInput" type="file" accept="image/*">
+
+
+    <div class="divider"></div>
+
+    <h2>Assets</h2>
+
+    <label>Upload main image</label>
+    <input id="imgInput" type="file" accept="image/*">
+
+    <label>Upload logo (optional)</label>
+    <input id="logoInput" type="file" accept="image/*">
+
+    <div class="lockedBadge" id="logoLockInfo">🔒 Logo locked for this preset: 30% width, Top center</div>
+
+    <div class="divider"></div>
+
+    <h2>Copy</h2>
+
+    <label>Attach copy sheet (.xlsx, .xls, .csv)</label>
+    <input id="copySheetInput" type="file" accept=".xlsx,.xls,.csv">
+
+    <div class="row">
+      <div>
+        <label>Search by keyword</label>
+        <input id="copyKeywordSearch" type="text" placeholder="Type keyword">
+      </div>
+      <div>
+        <label>Brand name</label>
+        <select id="copyBrandSelect">
+          <option value="">Select brand</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="subtle" id="copySheetStatus">Upload a sheet with columns: Brand Name, Keyword, Header, Body, CTA</div>
+
+    <div class="copyBlock">
+      <div class="copyTop">
+        <label>Header</label>
+      </div>
+      <textarea id="headerText">Italian Pop-Up
+Is Here!</textarea>
+    </div>
+
+    <div class="copyBlock">
+      <div class="copyTop">
+        <label>Body</label>
+      </div>
+      <textarea id="bodyText">Warm Italian Penne with white sauce pasta and indulgent hot chocolate milk awaits for you.</textarea>
+    </div>
+
+    <div class="copyBlock">
+      <div class="copyTop">
+        <label>CTA / Footer line</label>
+      </div>
+      <input id="ctaText" type="text" value="Served hot! | 22nd Jan, 2026">
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="copyTop">
+      <h2 style="margin:0;">Typography</h2>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span id="typeLockIcon">🔒</span>
+        <label class="switch">
+          <input type="checkbox" id="unlockTypography">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <div id="typographyControls" class="hidden">
+      <div class="row">
+        <div><label>Header size</label><input id="headerSize" type="number" min="8" value="96"></div>
+        <div><label>Header color</label><input id="headerColor" type="text" value="#2E5E7B"></div>
+      </div>
+      <div class="row">
+        <div><label>Body size</label><input id="bodySize" type="number" min="8" value="48"></div>
+        <div><label>Body color</label><input id="bodyColor" type="text" value="#1E1E1E"></div>
+      </div>
+      <div class="row">
+        <div><label>CTA size</label><input id="ctaSize" type="number" min="8" value="48"></div>
+        <div><label>CTA color</label><input id="ctaColor" type="text" value="#1E1E1E"></div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="copyTop">
+      <h2 style="margin:0;">Image Shape</h2>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span id="imageLockIcon">🔒</span>
+        <label class="switch">
+          <input type="checkbox" id="unlockImageShape">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <div id="imageShapeControls" class="hidden">
+      <label>Placeholder / image shape</label>
+      <select id="imageShape" disabled="">
+        <option value="rounded" selected="">Rounded rectangle</option>
+        <option value="circle">Circle</option>
+      </select>
+    </div>
+
+
+    <div class="divider"></div>
+
+    <div class="copyTop">
+      <h2 style="margin:0;">Nudge (fine positioning)</h2>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span id="nudgeLockIcon">🔒</span>
+        <label class="switch">
+          <input type="checkbox" id="unlockNudges">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <div id="nudgeControls" class="hidden">
+      <div class="row">
+        <div>
+          <label>Element</label>
+          <select id="nudgeTarget" disabled="">
+            <option value="logo">Logo</option>
+            <option value="header" selected="">Header</option>
+            <option value="image">Image</option>
+            <option value="body">Body</option>
+            <option value="cta">CTA</option>
+          </select>
+        </div>
+        <div>
+          <label>Step (px)</label>
+          <input id="nudgeStep" type="number" min="1" max="50" value="5" disabled="">
+        </div>
+      </div>
+
+      <div class="nudgeGrid">
+        <div></div>
+        <button class="nbtn" id="up" disabled="">⬆</button>
+        <div></div>
+
+        <button class="nbtn" id="left" disabled="">⬅</button>
+        <button class="nbtn" id="resetOne" title="Reset this element" disabled="">⟲</button>
+        <button class="nbtn" id="right" disabled="">➡</button>
+
+        <div></div>
+        <button class="nbtn" id="down" disabled="">⬇</button>
+        <div></div>
+      </div>
+
+      <div class="btns">
+        <button id="resetNudges" disabled="">Reset all nudges</button>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h2>Export</h2>
+
+    <label>File name</label>
+    <input id="exportFileName" type="text" value="creative_builder_export">
+
+    <div class="row">
+      <div>
+        <label>Format</label>
+        <select id="format">
+          <option value="jpeg" selected="">JPEG</option>
+          <option value="png">PNG</option>
+          <option value="pdf">PDF</option>
+        </select>
+      </div>
+      <div>
+        <label>Export resolution</label>
+        <select id="exportPpi">
+          <option value="75" selected="">75 PPI</option>
+          <option value="150">150 PPI</option>
+          <option value="300">300 PPI</option>
+        </select>
+      </div>
+    </div>
+
+    <label>JPEG quality (<span id="qLabel">1.00</span>)</label>
+    <input id="quality" type="range" min="0.6" max="1" step="0.01" value="0.92">
+
+    <div class="btns">
+      <button id="apply" class="primary">Apply / Save preset</button>
+      <button id="resetLayout">Reset to template</button>
+      <button id="exportBtn">Export current</button>
+      <button id="exportAllBtn">Export all presets</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const jsPDF = window.jspdf?.jsPDF || null;
+
+  const canvas = document.getElementById("canvas");
+  const ctx = canvas.getContext("2d");
+  const stage = document.getElementById("stage");
+
+  const requiredIds = [
+    "canvas","stage","preset","unlockLayoutControls","layoutControls","w","h","template","align",
+    "bgInput",
+    "imgInput","logoInput",
+    "copySheetInput","copyKeywordSearch","copyBrandSelect","copySheetStatus",
+    "headerText","bodyText","ctaText",
+    "unlockTypography","typographyControls",
+    "headerSize","bodySize","ctaSize",
+    "headerColor","bodyColor","ctaColor",
+    "unlockImageShape","imageShape","imageShapeControls",
+    "unlockNudges","nudgeControls",
+    "nudgeTarget","nudgeStep","up","down","left","right","resetOne","resetNudges",
+    "format","exportPpi","quality","apply","exportBtn","exportAllBtn","dimHint","exportFileName"
+  ];
+
+  const missingIds = requiredIds.filter(id => !document.getElementById(id));
+  if (missingIds.length) {
+    alert("Missing required HTML elements: " + missingIds.join(", "));
+    throw new Error("Missing required HTML elements: " + missingIds.join(", "));
+  }
+
+  const els = {
+    preset: document.getElementById("preset"),
+    unlockLayoutControls: document.getElementById("unlockLayoutControls"),
+    layoutControls: document.getElementById("layoutControls"),
+    defaultStyleMode: document.getElementById("defaultStyleMode"),
+    applyDefaults: document.getElementById("applyDefaults"),
+
+    w: document.getElementById("w"),
+    h: document.getElementById("h"),
+    template: document.getElementById("template"),
+    align: document.getElementById("align"),
+    bgInput: document.getElementById("bgInput"),
+
+    imgInput: document.getElementById("imgInput"),
+    logoInput: document.getElementById("logoInput"),
+    logoLockInfo: document.getElementById("logoLockInfo"),
+
+    copySheetInput: document.getElementById("copySheetInput"),
+    copyKeywordSearch: document.getElementById("copyKeywordSearch"),
+    copyBrandSelect: document.getElementById("copyBrandSelect"),
+    copySheetStatus: document.getElementById("copySheetStatus"),
+
+    headerText: document.getElementById("headerText"),
+    bodyText: document.getElementById("bodyText"),
+    ctaText: document.getElementById("ctaText"),
+
+    unlockTypography: document.getElementById("unlockTypography"),
+    typographyControls: document.getElementById("typographyControls"),
+
+    headerSize: document.getElementById("headerSize"),
+    bodySize: document.getElementById("bodySize"),
+    ctaSize: document.getElementById("ctaSize"),
+
+    headerColor: document.getElementById("headerColor"),
+    bodyColor: document.getElementById("bodyColor"),
+    ctaColor: document.getElementById("ctaColor"),
+
+    unlockImageShape: document.getElementById("unlockImageShape"),
+    imageShapeControls: document.getElementById("imageShapeControls"),
+    imageShape: document.getElementById("imageShape"),
+
+    unlockNudges: document.getElementById("unlockNudges"),
+    nudgeControls: document.getElementById("nudgeControls"),
+
+    nudgeTarget: document.getElementById("nudgeTarget"),
+    nudgeStep: document.getElementById("nudgeStep"),
+    up: document.getElementById("up"),
+    down: document.getElementById("down"),
+    left: document.getElementById("left"),
+    right: document.getElementById("right"),
+    resetOne: document.getElementById("resetOne"),
+    resetNudges: document.getElementById("resetNudges"),
+
+    format: document.getElementById("format"),
+    exportPpi: document.getElementById("exportPpi"),
+    quality: document.getElementById("quality"),
+    qLabel: document.getElementById("qLabel"),
+    exportFileName: document.getElementById("exportFileName"),
+
+    apply: document.getElementById("apply"),
+    resetLayout: document.getElementById("resetLayout"),
+    exportBtn: document.getElementById("exportBtn"),
+    exportAllBtn: document.getElementById("exportAllBtn"),
+
+    dimHint: document.getElementById("dimHint"),
+  };
+
+  let mainImg = null;
+  let logoImg = null;
+  let bgImage = null;
+
+  const PRESETS = {
+    "1080x1920": {
+      name: "digital-standee",
+      w: 1080, h: 1920,
+      header: 96, body: 48, cta: 48,
+      headerColor: "#2E5E7B",
+      bodyColor: "#1E1E1E",
+      ctaColor: "#1E1E1E",
+      align: "center",
+      template: "stack",
+      logo: { widthPct: 30, pos: "top_center" }
+    },
+    "864x1700": {
+      name: "notification",
+      w: 864, h: 1700,
+      header: 90, body: 40, cta: 40,
+      headerColor: "#2E5E7B",
+      bodyColor: "#1E1E1E",
+      ctaColor: "#1E1E1E",
+      align: "center",
+      template: "stack",
+      logo: { widthPct: 25, pos: "top_center" }
+    },
+    "400x700": {
+      name: "ad-banner",
+      w: 400, h: 700,
+      header: 40, body: 15, cta: 15,
+      headerColor: "#2E5E7B",
+      bodyColor: "#1E1E1E",
+      ctaColor: "#1E1E1E",
+      align: "center",
+      template: "stack",
+      logo: { widthPct: 30, pos: "top_center" }
+    },
+    "960x540": {
+      name: "app-banner",
+      w: 960, h: 540,
+      header: 55, body: 25, cta: 25,
+      headerColor: "#2E5E7B",
+      bodyColor: "#1E1E1E",
+      ctaColor: "#1E1E1E",
+      align: "left",
+      template: "side",
+      logo: { widthPct: 15, pos: "top_left" }
+    },
+    "1920x1080": {
+      name: "tv-creative",
+      w: 1920, h: 1080,
+      header: 100, body: 35, cta: 35,
+      headerColor: "#2E5E7B",
+      bodyColor: "#1E1E1E",
+      ctaColor: "#1E1E1E",
+      align: "left",
+      template: "side",
+      logo: { widthPct: 15, pos: "top_left" }
+    }
+  };
+
+  function createDefaultNudges() {
+    return {
+      logo:  { dx:0, dy:0 },
+      header:{ dx:0, dy:0 },
+      image: { dx:0, dy:0 },
+      body:  { dx:0, dy:0 },
+      cta:   { dx:0, dy:0 },
+    };
+  }
+
+  function createDefaultCreativeState(presetValue) {
+    const cfg = PRESETS[presetValue];
+    return {
+      preset: presetValue,
+      w: cfg.w,
+      h: cfg.h,
+      template: cfg.template,
+      align: cfg.align,
+      nudges: createDefaultNudges()
+    };
+  }
+
+  const creativeLibrary = {};
+
+  function ensurePresetState(presetValue) {
+    if (!creativeLibrary[presetValue]) {
+      creativeLibrary[presetValue] = createDefaultCreativeState(presetValue);
+    }
+    return creativeLibrary[presetValue];
+  }
+
+  function getCurrentPresetState() {
+    return ensurePresetState(els.preset.value);
+  }
+
+  function getCurrentNudges() {
+    return getCurrentPresetState().nudges;
+  }
+
+  function saveLibraryToLocal() {
+    localStorage.setItem("creativeBuilderLibrary_v3", JSON.stringify(creativeLibrary));
+  }
+
+  function loadLibraryFromLocal() {
+    try {
+      const raw = localStorage.getItem("creativeBuilderLibrary_v3");
+      if (!raw) return;
+      const parsed = JSON.parse(raw);
+
+      Object.keys(parsed).forEach(preset => {
+        if (!PRESETS[preset]) return;
+        const safeBase = createDefaultCreativeState(preset);
+        const loaded = parsed[preset] || {};
+
+        creativeLibrary[preset] = {
+          preset,
+          w: loaded.w ?? safeBase.w,
+          h: loaded.h ?? safeBase.h,
+          template: loaded.template ?? safeBase.template,
+          align: loaded.align ?? safeBase.align,
+          nudges: {
+            logo: {
+              dx: loaded.nudges?.logo?.dx ?? 0,
+              dy: loaded.nudges?.logo?.dy ?? 0
+            },
+            header: {
+              dx: loaded.nudges?.header?.dx ?? 0,
+              dy: loaded.nudges?.header?.dy ?? 0
+            },
+            image: {
+              dx: loaded.nudges?.image?.dx ?? 0,
+              dy: loaded.nudges?.image?.dy ?? 0
+            },
+            body: {
+              dx: loaded.nudges?.body?.dx ?? 0,
+              dy: loaded.nudges?.body?.dy ?? 0
+            },
+            cta: {
+              dx: loaded.nudges?.cta?.dx ?? 0,
+              dy: loaded.nudges?.cta?.dy ?? 0
+            }
+          }
+        };
+      });
+    } catch (err) {
+      console.warn("Library restore failed", err);
+    }
+  }
+
+  let copySheetRows = [];
+
+  function normalizeKey(value){
+    return String(value || "")
+      .toLowerCase()
+      .replace(/[\s_\-]+/g, " ")
+      .trim();
+  }
+
+  function normalizeHeaderMap(row){
+    const mapped = {};
+    Object.keys(row || {}).forEach(key => {
+      mapped[normalizeKey(key)] = row[key];
+    });
+    return mapped;
+  }
+
+  function extractCopyRows(rows){
+    return (rows || []).map(row => {
+      const item = normalizeHeaderMap(row);
+      const brandName = item["brand name"] ?? item["brand"] ?? item["brandname"] ?? "";
+      const keyword = item["keyword"] ?? item["keywords"] ?? "";
+      const header = item["header"] ?? item["heading"] ?? "";
+      const body = item["body"] ?? item["description"] ?? item["copy body"] ?? "";
+      const cta = item["cta"] ?? item["call to action"] ?? item["footer"] ?? "";
+      return {
+        brandName: String(brandName || "").trim(),
+        keyword: String(keyword || "").trim(),
+        header: String(header || "").trim(),
+        body: String(body || "").trim(),
+        cta: String(cta || "").trim()
+      };
+    }).filter(row => row.brandName || row.keyword || row.header || row.body || row.cta);
+  }
+
+  function updateCopySheetStatus(message){
+    els.copySheetStatus.textContent = message;
+  }
+
+  function populateBrandDropdown(){
+    const keyword = normalizeKey(els.copyKeywordSearch.value);
+    const prev = els.copyBrandSelect.value;
+    const matches = copySheetRows.filter(row => {
+      if (!keyword) return true;
+      return normalizeKey(row.keyword).includes(keyword);
+    });
+
+    els.copyBrandSelect.innerHTML = '<option value="">Select brand</option>';
+
+    const seen = new Set();
+    matches.forEach(row => {
+      const label = row.brandName || "Unnamed brand";
+      const value = label;
+      if (seen.has(value)) return;
+      seen.add(value);
+      const option = document.createElement("option");
+      option.value = value;
+      option.textContent = label;
+      els.copyBrandSelect.appendChild(option);
+    });
+
+    if (seen.has(prev)) {
+      els.copyBrandSelect.value = prev;
+    }
+
+    if (!copySheetRows.length) {
+      updateCopySheetStatus("Upload a sheet with columns: Brand Name, Keyword, Header, Body, CTA");
+      return;
+    }
+
+    if (matches.length) {
+      updateCopySheetStatus(`${matches.length} matching row${matches.length === 1 ? '' : 's'} found`);
+    } else {
+      updateCopySheetStatus("No matching brands found for this keyword");
+    }
+  }
+
+  function autofillCopyFromSelection(){
+    const keyword = normalizeKey(els.copyKeywordSearch.value);
+    const brand = els.copyBrandSelect.value;
+    if (!brand) return;
+
+    const row = copySheetRows.find(item => {
+      const brandMatch = item.brandName === brand;
+      const keywordMatch = !keyword || normalizeKey(item.keyword).includes(keyword);
+      return brandMatch && keywordMatch;
+    }) || copySheetRows.find(item => item.brandName === brand);
+
+    if (!row) return;
+
+    els.headerText.value = row.header;
+    els.bodyText.value = row.body;
+    els.ctaText.value = row.cta;
+    draw();
+    updateCopySheetStatus(`Autofilled copy for ${brand}${row.keyword ? ` · ${row.keyword}` : ''}`);
+  }
+
+  function readCopySheet(file){
+    const ext = (file.name.split('.').pop() || '').toLowerCase();
+    const reader = new FileReader();
+
+    reader.onload = (event) => {
+      try {
+        let workbook;
+        if (ext === 'csv') {
+          workbook = XLSX.read(event.target.result, { type: 'string' });
+        } else {
+          workbook = XLSX.read(event.target.result, { type: 'array' });
+        }
+        const firstSheetName = workbook.SheetNames[0];
+        const worksheet = workbook.Sheets[firstSheetName];
+        const rawRows = XLSX.utils.sheet_to_json(worksheet, { defval: '' });
+        copySheetRows = extractCopyRows(rawRows);
+        els.copyKeywordSearch.value = '';
+        populateBrandDropdown();
+        updateCopySheetStatus(copySheetRows.length
+          ? `${copySheetRows.length} copy row${copySheetRows.length === 1 ? '' : 's'} loaded from ${file.name}`
+          : `No valid copy rows found in ${file.name}`);
+      } catch (error) {
+        console.error(error);
+        copySheetRows = [];
+        populateBrandDropdown();
+        updateCopySheetStatus(`Could not read ${file.name}. Please check the sheet format.`);
+      }
+    };
+
+    if (ext === 'csv') {
+      reader.readAsText(file);
+    } else {
+      reader.readAsArrayBuffer(file);
+    }
+  }
+
+  function clampInt(val, min, max){
+    const n = parseInt(val, 10);
+    if (Number.isNaN(n)) return min;
+    return Math.max(min, Math.min(max, n));
+  }
+
+  function safeColor(input, fallback){
+    const s = String(input || "").trim();
+    if (/^#([0-9a-fA-F]{3}){1,2}$/.test(s)) return s;
+    return fallback;
+  }
+
+  function getPresetConfig(presetValue = els.preset.value){
+    return PRESETS[presetValue];
+  }
+
+  function updateLogoLockInfo(){
+    const cfg = getPresetConfig();
+    const posText = {
+      top_center: "Top center",
+      top_left: "Top left",
+      top_right: "Top right"
+    }[cfg.logo.pos] || cfg.logo.pos;
+
+    els.logoLockInfo.textContent = `🔒 Logo locked for this preset: ${cfg.logo.widthPct}% width, ${posText}`;
+  }
+
+  function setLayoutControlsDisabled(disabled){
+    [els.defaultStyleMode, els.applyDefaults, els.w, els.h, els.template, els.align].forEach(el => {
+      if (el) el.disabled = disabled;
+    });
+  }
+
+  function updateLayoutControlsUI(){
+    const unlocked = els.unlockLayoutControls.checked;
+    els.layoutControls.classList.toggle("hidden", !unlocked);
+    setLayoutControlsDisabled(!unlocked);
+  }
+
+  function updateTypographyUI(){
+    const unlocked = els.unlockTypography.checked;
+    els.typographyControls.classList.toggle("hidden", !unlocked);
+  }
+
+  function updateNudgeUI(){
+    const unlocked = els.unlockNudges.checked;
+    els.nudgeControls.classList.toggle("hidden", !unlocked);
+    if (typeof setNudgeButtonsDisabled === "function") {
+      setNudgeButtonsDisabled(!unlocked);
+    }
+  }
+
+  function updateImageShapeUI(){
+    const unlocked = els.unlockImageShape.checked;
+    if (els.imageShapeControls) {
+      els.imageShapeControls.classList.toggle("hidden", !unlocked);
+    }
+    els.imageShape.disabled = !unlocked;
+  }
+
+  function updateLockIcons(){
+    const layoutIcon = document.getElementById("layoutLockIcon");
+    const typeIcon = document.getElementById("typeLockIcon");
+    const imageIcon = document.getElementById("imageLockIcon");
+    const nudgeIcon = document.getElementById("nudgeLockIcon");
+
+    if (layoutIcon) layoutIcon.textContent = els.unlockLayoutControls.checked ? "🔓" : "🔒";
+    if (typeIcon) typeIcon.textContent = els.unlockTypography.checked ? "🔓" : "🔒";
+    if (imageIcon) imageIcon.textContent = els.unlockImageShape.checked ? "🔓" : "🔒";
+    if (nudgeIcon) nudgeIcon.textContent = els.unlockNudges.checked ? "🔓" : "🔒";
+  }
+
+  function applyTypographyForPreset(presetValue){
+    const cfg = PRESETS[presetValue];
+    if (!cfg) return;
+
+    if (!els.unlockTypography.checked){
+      els.headerSize.value = cfg.header;
+      els.bodySize.value = cfg.body;
+      els.ctaSize.value = cfg.cta;
+
+      els.headerColor.value = cfg.headerColor;
+      els.bodyColor.value = cfg.bodyColor;
+      els.ctaColor.value = cfg.ctaColor;
+    }
+  }
+
+  function loadPresetStateIntoUI(presetValue) {
+    const cfg = PRESETS[presetValue];
+    const state = ensurePresetState(presetValue);
+
+    els.w.value = state.w ?? cfg.w;
+    els.h.value = state.h ?? cfg.h;
+    els.template.value = state.template ?? cfg.template;
+    els.align.value = state.align ?? cfg.align;
+
+    if (els.defaultStyleMode.value === "auto") {
+      els.w.value = cfg.w;
+      els.h.value = cfg.h;
+      els.template.value = cfg.template;
+      els.align.value = cfg.align;
+    }
+
+    applyTypographyForPreset(presetValue);
+    updateLogoLockInfo();
+    updateLayoutControlsUI();
+    updateTypographyUI();
+    updateNudgeUI();
+  }
+
+  function saveCurrentPresetState() {
+    const preset = els.preset.value;
+    const state = ensurePresetState(preset);
+
+    state.w = clampInt(els.w.value, 50, 10000);
+    state.h = clampInt(els.h.value, 50, 10000);
+    state.template = els.template.value;
+    state.align = els.align.value;
+    state.nudges = JSON.parse(JSON.stringify(getCurrentNudges()));
+
+    saveLibraryToLocal();
+  }
+
+  function setCanvasSize(){
+    const w = clampInt(els.w.value, 50, 10000);
+    const h = clampInt(els.h.value, 50, 10000);
+    canvas.width = w;
+    canvas.height = h;
+    els.dimHint.textContent = `${w} × ${h}px`;
+    fitPreviewToStage();
+  }
+
+  function fitPreviewToStage(){
+    const sw = Math.max(100, stage.clientWidth - 32);
+    const sh = Math.max(100, stage.clientHeight - 32);
+    const cw = canvas.width;
+    const ch = canvas.height;
+
+    const scale = Math.min(sw / cw, sh / ch, 1);
+    canvas.style.width = `${Math.round(cw * scale)}px`;
+    canvas.style.height = `${Math.round(ch * scale)}px`;
+  }
+
+  function applyDefaultStyleForPreset(presetValue){
+    const d = PRESETS[presetValue];
+    if (!d) return;
+
+    const state = ensurePresetState(presetValue);
+    state.w = d.w;
+    state.h = d.h;
+    state.template = d.template;
+    state.align = d.align;
+
+    loadPresetStateIntoUI(presetValue);
+    draw();
+  }
+
+  function getAutoTemplate(width, height){
+    const ratio = width / height;
+    return ratio > 1.1 ? "side" : "stack";
+  }
+  function getTypographyValues(){
+    const cfg = getPresetConfig();
+
+    if (!els.unlockTypography.checked){
+      return {
+        headerSize: cfg.header,
+        bodySize: cfg.body,
+        ctaSize: cfg.cta,
+        headerColor: cfg.headerColor,
+        bodyColor: cfg.bodyColor,
+        ctaColor: cfg.ctaColor
+      };
+    }
+
+    return {
+      headerSize: clampInt(els.headerSize.value, 8, 420),
+      bodySize: clampInt(els.bodySize.value, 8, 240),
+      ctaSize: clampInt(els.ctaSize.value, 8, 240),
+      headerColor: safeColor(els.headerColor.value, cfg.headerColor),
+      bodyColor: safeColor(els.bodyColor.value, cfg.bodyColor),
+      ctaColor: safeColor(els.ctaColor.value, cfg.ctaColor)
+    };
+  }
+
+  function drawBackground(targetCtx, targetCanvas){
+    const W = targetCanvas.width;
+    const H = targetCanvas.height;
+
+    targetCtx.clearRect(0, 0, W, H);
+
+    if (bgImage) {
+      const preset = els.preset.value;
+      const shouldRotateRight = preset === "960x540" || preset === "1920x1080";
+
+      targetCtx.save();
+      targetCtx.imageSmoothingEnabled = true;
+      targetCtx.imageSmoothingQuality = "high";
+
+      if (shouldRotateRight) {
+        const iw = bgImage.width;
+        const ih = bgImage.height;
+        const scale = Math.max(W / ih, H / iw);
+        const dw = ih * scale;
+        const dh = iw * scale;
+
+        targetCtx.translate(W / 2, H / 2);
+        targetCtx.rotate(Math.PI / 2);
+        targetCtx.drawImage(bgImage, -iw * scale / 2, -ih * scale / 2, iw * scale, ih * scale);
+      } else {
+        const iw = bgImage.width;
+        const ih = bgImage.height;
+        const scale = Math.max(W / iw, H / ih);
+        const dw = iw * scale;
+        const dh = ih * scale;
+        const dx = (W - dw) / 2;
+        const dy = (H - dh) / 2;
+        targetCtx.drawImage(bgImage, dx, dy, dw, dh);
+      }
+
+      targetCtx.restore();
+      return;
+    }
+
+    targetCtx.fillStyle = "#F7F0DC";
+    targetCtx.fillRect(0, 0, W, H);
+  }
+
+  function wrapLines(targetCtx, text, maxW, font){
+    targetCtx.save();
+    targetCtx.font = font;
+    const paragraphs = String(text || "").split("\n");
+    const lines = [];
+
+    for (const p of paragraphs){
+      const words = p.trim().split(/\s+/).filter(Boolean);
+      if (words.length === 0){
+        lines.push("");
+        continue;
+      }
+
+      let line = "";
+      for (const w of words){
+        const test = line ? line + " " + w : w;
+        if (targetCtx.measureText(test).width <= maxW) line = test;
+        else {
+          if (line) lines.push(line);
+          line = w;
+        }
+      }
+      if (line) lines.push(line);
+    }
+
+    targetCtx.restore();
+    return lines;
+  }
+  function buildFont({family, size, weight = 400}){
+    return `${weight} ${size}px ${family}`;
+  }
+
+  function drawWrappedText(targetCtx, {text, x, y, maxW, font, fill, lineH, align}){
+    if (!text) return;
+
+    targetCtx.save();
+    targetCtx.font = font;
+    targetCtx.fillStyle = fill;
+    targetCtx.textBaseline = "top";
+
+    const lines = wrapLines(targetCtx, text, maxW, font);
+    let yy = y;
+
+    for (const ln of lines){
+      const w = targetCtx.measureText(ln).width;
+      let drawX = x;
+      if (align === "center") drawX = x - w / 2;
+      if (align === "right") drawX = x - w;
+      targetCtx.fillText(ln, drawX, yy);
+      yy += lineH;
+    }
+
+    targetCtx.restore();
+  }
+
+  function roundedRectPath(c, x, y, w, h, r){
+    const rr = Math.min(r, w / 2, h / 2);
+    c.beginPath();
+    c.moveTo(x + rr, y);
+    c.arcTo(x + w, y, x + w, y + h, rr);
+    c.arcTo(x + w, y + h, x, y + h, rr);
+    c.arcTo(x, y + h, x, y, rr);
+    c.arcTo(x, y, x + w, y, rr);
+    c.closePath();
+  }
+
+  function circlePath(c, cx, cy, r){
+    c.beginPath();
+    c.arc(cx, cy, r, 0, Math.PI * 2);
+    c.closePath();
+  }
+
+  function getImageMaskBox(box, shape){
+    if (shape === "circle"){
+      const diameter = Math.min(box.w, box.h);
+      const extraRadius = 19;
+      return {
+        type: "circle",
+        cx: box.x + box.w / 2,
+        cy: box.y + box.h / 2,
+        r: (diameter / 2) + extraRadius
+      };
+    }
+
+    return {
+      type: "rounded",
+      x: box.x,
+      y: box.y,
+      w: box.w,
+      h: box.h,
+      r: Math.round(Math.min(box.w, box.h) * 0.06)
+    };
+  }
+
+  function drawImageMask(targetCtx, image, box, shape){
+    const mask = getImageMaskBox(box, shape);
+
+    targetCtx.save();
+
+    if (mask.type === "circle"){
+      circlePath(targetCtx, mask.cx, mask.cy, mask.r);
+      targetCtx.clip();
+
+      const targetSize = mask.r * 2;
+      const iw = image.width;
+      const ih = image.height;
+      const scale = Math.max(targetSize / iw, targetSize / ih);
+      const dw = iw * scale;
+      const dh = ih * scale;
+      const dx = mask.cx - dw / 2;
+      const dy = mask.cy - dh / 2;
+
+      targetCtx.drawImage(image, dx, dy, dw, dh);
+    } else {
+      if (mask.type === "rounded") {
+        roundedRectPath(targetCtx, mask.x, mask.y, mask.w, mask.h, mask.r);
+        targetCtx.clip();
+      } else {
+        targetCtx.beginPath();
+        targetCtx.rect(mask.x, mask.y, mask.w, mask.h);
+        targetCtx.clip();
+      }
+
+      const iw = image.width;
+      const ih = image.height;
+      const scale = Math.max(mask.w / iw, mask.h / ih);
+      const dw = iw * scale;
+      const dh = ih * scale;
+      const dx = mask.x + (mask.w - dw) / 2;
+      const dy = mask.y + (mask.h - dh) / 2;
+
+      targetCtx.drawImage(image, dx, dy, dw, dh);
+    }
+
+    targetCtx.restore();
+  }
+
+  function drawPlaceholder(targetCtx, box, shape, baseCanvas){
+    const mask = getImageMaskBox(box, shape);
+
+    targetCtx.save();
+    targetCtx.fillStyle = "rgba(255,255,255,0.18)";
+    targetCtx.strokeStyle = "rgba(0,0,0,0.22)";
+    targetCtx.lineWidth = Math.max(2, Math.round(Math.min(baseCanvas.width, baseCanvas.height) * 0.0025));
+
+    if (mask.type === "circle"){
+      circlePath(targetCtx, mask.cx, mask.cy, mask.r);
+      targetCtx.fill();
+      targetCtx.stroke();
+
+      targetCtx.fillStyle = "rgba(0,0,0,0.35)";
+      targetCtx.font = `600 ${Math.max(14, Math.round(Math.min(baseCanvas.width, baseCanvas.height) * 0.02))}px "Poppins", sans-serif`;
+      targetCtx.textBaseline = "middle";
+      const label = "Upload image";
+      const tw = targetCtx.measureText(label).width;
+      targetCtx.fillText(label, mask.cx - tw / 2, mask.cy);
+    } else {
+      if (mask.type === "rounded") {
+        roundedRectPath(targetCtx, mask.x, mask.y, mask.w, mask.h, mask.r);
+      } else {
+        targetCtx.beginPath();
+        targetCtx.rect(mask.x, mask.y, mask.w, mask.h);
+      }
+      targetCtx.fill();
+      targetCtx.stroke();
+
+      targetCtx.fillStyle = "rgba(0,0,0,0.35)";
+      targetCtx.font = `600 ${Math.max(14, Math.round(Math.min(baseCanvas.width, baseCanvas.height) * 0.02))}px "Poppins", sans-serif`;
+      targetCtx.textBaseline = "middle";
+      const label = "Upload image";
+      const tw = targetCtx.measureText(label).width;
+      targetCtx.fillText(label, mask.x + Math.max(18, (mask.w - tw) / 2), mask.y + mask.h / 2);
+    }
+
+    targetCtx.restore();
+  }
+
+  function drawCTABtn(targetCtx, text, box, size){
+    if (!text) return;
+
+    const bg = safeColor(els.ctaBg.value, "#2E5E7B");
+    const tc = "#FFFFFF";
+
+    targetCtx.save();
+    targetCtx.font = `600 ${size}px "Poppins", sans-serif`;
+    targetCtx.textBaseline = "top";
+
+    const padX = Math.round(size * 0.9);
+    const padY = Math.round(size * 0.55);
+    const tw = targetCtx.measureText(text).width;
+    const bw = Math.round(tw + padX * 2);
+    const bh = Math.round(size + padY * 2);
+
+    let x = box.x;
+    if (box.align === "center") x = x - bw / 2;
+    if (box.align === "right") x = x - bw;
+    const y = box.y;
+
+    targetCtx.fillStyle = bg;
+    roundedRectPath(targetCtx, x, y, bw, bh, Math.round(bh / 2));
+    targetCtx.fill();
+
+    targetCtx.fillStyle = tc;
+    targetCtx.fillText(text, x + padX, y + padY);
+
+    targetCtx.restore();
+  }
+
+  function computeLayout(targetCanvas, presetCfg, renderScale = 1){
+    const W = targetCanvas.width;
+    const H = targetCanvas.height;
+    const safe = Math.round(Math.min(W, H) * (W > H ? 0.08 : 0.07));
+
+    const template = (els.template.value === "auto")
+      ? getAutoTemplate(W, H)
+      : els.template.value;
+
+    const align = els.align.value;
+    const gapH = Math.round(H * 0.04);
+    const gapSmall = Math.round(H * 0.02);
+    const baseNudges = getCurrentNudges();
+    const nudges = {
+      logo: { dx: baseNudges.logo.dx * renderScale, dy: baseNudges.logo.dy * renderScale },
+      header: { dx: baseNudges.header.dx * renderScale, dy: baseNudges.header.dy * renderScale },
+      image: { dx: baseNudges.image.dx * renderScale, dy: baseNudges.image.dy * renderScale },
+      body: { dx: baseNudges.body.dx * renderScale, dy: baseNudges.body.dy * renderScale },
+      cta: { dx: baseNudges.cta.dx * renderScale, dy: baseNudges.cta.dy * renderScale }
+    };
+    const shape = els.imageShape.value;
+
+    const logoEnabled = !!logoImg;
+    const logoCfg = presetCfg.logo;
+
+    let computed = {
+      safe,
+      logo: { enabled:false, x:0, y:0, w:0, h:0 },
+      header: { x:0, y:0, maxW:0, align },
+      body: { x:0, y:0, maxW:0, align },
+      cta: { x:0, y:0, maxW:0, align },
+      image: { x:0, y:0, w:0, h:0 }
+    };
+
+    if (logoEnabled){
+      const targetW = Math.round(W * (logoCfg.widthPct / 100));
+      const aspect = logoImg.width / logoImg.height;
+      const logoH = Math.round(targetW / aspect);
+
+      let x = safe;
+      if (logoCfg.pos === "top_center") x = Math.round((W - targetW) / 2);
+      if (logoCfg.pos === "top_right") x = W - safe - targetW;
+      if (logoCfg.pos === "top_left") x = safe;
+
+      let y = safe;
+
+      x += nudges.logo.dx;
+      y += nudges.logo.dy;
+
+      computed.logo = { enabled:true, x, y, w:targetW, h:logoH };
+    }
+
+    if (template === "stack"){
+
+      const centerX = Math.round(W / 2);
+      const topY = logoEnabled ? (computed.logo.y + computed.logo.h + gapSmall) : safe;
+
+      const headerMaxW = Math.round(W * 0.78);
+      const imgW = Math.round(W * 0.78);
+      const imgH = Math.round(H * 0.42);
+      const imgX = Math.round((W - imgW) / 2);
+
+      let headerX = centerX;
+      let headerY = topY;
+
+      let imgY = headerY + gapH + Math.round(H * 0.02);
+
+      const bodyMaxW = Math.round(W * 0.74);
+      let bodyX = centerX;
+      let bodyY = imgY + imgH + gapH;
+
+      const ctaMaxW = Math.round(W * 0.84);
+      let ctaX = centerX;
+      let ctaY = Math.round(H - safe - Math.max(60, H * 0.06));
+
+      headerX += nudges.header.dx; headerY += nudges.header.dy;
+      bodyX += nudges.body.dx; bodyY += nudges.body.dy;
+      ctaX += nudges.cta.dx; ctaY += nudges.cta.dy;
+
+      const ix = imgX + nudges.image.dx;
+      const iy = imgY + nudges.image.dy;
+
+      computed.header = { x:headerX, y:headerY, maxW:headerMaxW, align };
+      computed.image = { x:ix, y:iy, w:imgW, h:imgH };
+      computed.body = { x:bodyX, y:bodyY, maxW:bodyMaxW, align };
+      computed.cta = { x:ctaX, y:ctaY, maxW:ctaMaxW, align };
+      return computed;
+    }
+
+    const leftW = Math.round(W * 0.54);
+    const rightW = W - safe * 2 - leftW;
+    const headerMaxW = Math.round(leftW * 0.92);
+
+    const textLeft = safe;
+    const xAnchor = (align === "left")
+      ? textLeft
+      : (align === "right")
+        ? (textLeft + headerMaxW)
+        : (textLeft + Math.round(headerMaxW / 2));
+
+    const topY = logoEnabled ? (computed.logo.y + computed.logo.h + Math.round(H * 0.02)) : safe;
+
+    let headerX = xAnchor;
+    let headerY = topY + Math.round(H * 0.10);
+
+    let bodyX = xAnchor;
+    let bodyY = headerY + Math.round(H * 0.28);
+
+    let ctaX = xAnchor;
+    let ctaY = Math.round(H - safe - Math.max(40, H * 0.12));
+
+    const imgW = rightW;
+    const imgH = Math.round(H * 0.78);
+    const imgX = safe + leftW;
+    const imgY = Math.round((H - imgH) / 2);
+
+    headerX += nudges.header.dx; headerY += nudges.header.dy;
+    bodyX += nudges.body.dx; bodyY += nudges.body.dy;
+    ctaX += nudges.cta.dx; ctaY += nudges.cta.dy;
+
+    const ix = imgX + nudges.image.dx;
+    const iy = imgY + nudges.image.dy;
+
+    computed.header = { x:headerX, y:headerY, maxW:headerMaxW, align };
+    computed.body = { x:bodyX, y:bodyY, maxW:headerMaxW, align };
+    computed.cta = { x:ctaX, y:ctaY, maxW:headerMaxW, align };
+    computed.image = { x:ix, y:iy, w:imgW, h:imgH };
+
+    return computed;
+  }
+
+  function renderToCanvas(targetCanvas, renderScale = 1){
+    const targetCtx = targetCanvas.getContext("2d");
+    const presetCfg = getPresetConfig();
+    const localLayout = computeLayout(targetCanvas, presetCfg, renderScale);
+    const typeBase = getTypographyValues();
+    const type = {
+      headerSize: Math.round(typeBase.headerSize * renderScale),
+      bodySize: Math.round(typeBase.bodySize * renderScale),
+      ctaSize: Math.round(typeBase.ctaSize * renderScale),
+      headerColor: typeBase.headerColor,
+      bodyColor: typeBase.bodyColor,
+      ctaColor: typeBase.ctaColor,
+      headerStyle: typeBase.headerStyle,
+      bodyStyle: typeBase.bodyStyle,
+      ctaStyle: typeBase.ctaStyle
+    };
+
+    drawBackground(targetCtx, targetCanvas);
+
+    if (localLayout.logo.enabled && logoImg){
+      targetCtx.save();
+      targetCtx.imageSmoothingEnabled = true;
+      targetCtx.imageSmoothingQuality = "high";
+      targetCtx.drawImage(
+        logoImg,
+        localLayout.logo.x,
+        localLayout.logo.y,
+        localLayout.logo.w,
+        localLayout.logo.h
+      );
+      targetCtx.restore();
+    }
+
+    const shape = els.imageShape.value;
+
+    if (!mainImg){
+      if (els.unlockImageShape.checked) {
+        drawPlaceholder(targetCtx, localLayout.image, shape, targetCanvas);
+      }
+    } else {
+      drawImageMask(targetCtx, mainImg, localLayout.image, shape);
+    }
+
+    drawWrappedText(targetCtx, {
+      text: els.headerText.value,
+      x: localLayout.header.x,
+      y: localLayout.header.y,
+      maxW: localLayout.header.maxW,
+      font: buildFont({ family: '"DM Serif Display", serif', size: type.headerSize, weight: 700 }),
+      fill: type.headerColor,
+      lineH: Math.round(type.headerSize * 1.08),
+      align: localLayout.header.align
+    });
+
+    drawWrappedText(targetCtx, {
+      text: els.bodyText.value,
+      x: localLayout.body.x,
+      y: localLayout.body.y,
+      maxW: localLayout.body.maxW,
+      font: buildFont({ family: '"Poppins", sans-serif', size: type.bodySize }),
+      fill: type.bodyColor,
+      lineH: Math.round(type.bodySize * 1.55),
+      align: localLayout.body.align
+    });
+
+    drawWrappedText(targetCtx, {
+      text: els.ctaText.value,
+      x: localLayout.cta.x,
+      y: localLayout.cta.y,
+      maxW: localLayout.cta.maxW,
+      font: buildFont({ family: '"Poppins", sans-serif', size: type.ctaSize, weight: 700 }),
+      fill: type.ctaColor,
+      lineH: Math.round(type.ctaSize * 1.2),
+      align: localLayout.cta.align
+    });
+  }
+
+  function draw(){
+    renderToCanvas(canvas);
+    fitPreviewToStage();
+  }
+
+  function setNudgeButtonsDisabled(disabled){
+    [els.up, els.down, els.left, els.right, els.resetOne, els.resetNudges, els.nudgeTarget, els.nudgeStep].forEach(el => {
+      if (el) el.disabled = disabled;
+    });
+  }
+
+  function step(){
+    return clampInt(els.nudgeStep.value, 1, 50);
+  }
+
+  function nudge(dx, dy){
+    if (!els.unlockNudges.checked) return;
+    const t = els.nudgeTarget.value;
+    const nudges = getCurrentNudges();
+    nudges[t].dx += dx;
+    nudges[t].dy += dy;
+    draw();
+  }
+
+  function resetOne(){
+    if (!els.unlockNudges.checked) return;
+    const t = els.nudgeTarget.value;
+    const nudges = getCurrentNudges();
+    nudges[t].dx = 0;
+    nudges[t].dy = 0;
+    draw();
+  }
+
+  function resetAllNudges(){
+    if (!els.unlockNudges.checked) return;
+    const nudges = getCurrentNudges();
+    Object.keys(nudges).forEach(k => {
+      nudges[k].dx = 0;
+      nudges[k].dy = 0;
+    });
+    draw();
+  }
+
+  function dataUrlToBlob(dataUrl){
+    const parts = dataUrl.split(',');
+    const mime = parts[0].match(/:(.*?);/)[1];
+    const bstr = atob(parts[1]);
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+    while(n--){
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new Blob([u8arr], { type:mime });
+  }
+
+  function downloadBlob(blob, filename){
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 500);
+  }
+
+  function getRenderedCanvas(renderScale = 1, presetValue = els.preset.value){
+    const cfg = PRESETS[presetValue];
+    const prevPreset = els.preset.value;
+
+    els.preset.value = presetValue;
+
+    const state = ensurePresetState(presetValue);
+
+    const out = document.createElement("canvas");
+    out.width = Math.round((state.w ?? cfg.w) * renderScale);
+    out.height = Math.round((state.h ?? cfg.h) * renderScale);
+
+    const backupUI = {
+      w: els.w.value,
+      h: els.h.value,
+      template: els.template.value,
+      align: els.align.value
+    };
+
+    els.w.value = state.w ?? cfg.w;
+    els.h.value = state.h ?? cfg.h;
+    els.template.value = state.template ?? cfg.template;
+    els.align.value = state.align ?? cfg.align;
+
+    renderToCanvas(out, renderScale);
+
+    els.preset.value = prevPreset;
+    els.w.value = backupUI.w;
+    els.h.value = backupUI.h;
+    els.template.value = backupUI.template;
+    els.align.value = backupUI.align;
+
+    return out;
+  }
+
+  function canvasToJpegDataUrl(targetCanvas, quality, dpi){
+    let jpegDataUrl = targetCanvas.toDataURL("image/jpeg", quality);
+
+    try{
+      const zeroth = {};
+      zeroth[piexif.ImageIFD.XResolution] = [dpi, 1];
+      zeroth[piexif.ImageIFD.YResolution] = [dpi, 1];
+      zeroth[piexif.ImageIFD.ResolutionUnit] = 2;
+      const exifObj = {"0th": zeroth};
+      jpegDataUrl = piexif.insert(piexif.dump(exifObj), jpegDataUrl);
+    } catch(e){
+      console.warn("EXIF insert failed:", e);
+    }
+
+    return jpegDataUrl;
+  }
+
+  async function exportCurrent(){
+    const format = els.format.value;
+    const ppi = parseInt(els.exportPpi.value, 10) || 75;
+    const renderScale = Math.max(1, ppi / 75);
+    const quality = Number(els.quality.value);
+    const presetCfg = getPresetConfig();
+    const state = ensurePresetState(els.preset.value);
+    const customName = (els.exportFileName.value || "creative_builder_export").trim().replace(/[\\/:*?"<>|]+/g, "_");
+    const baseName = customName || `creative_${presetCfg.name}_${state.w}x${state.h}_${ppi}ppi`;
+
+    const out = getRenderedCanvas(renderScale, els.preset.value);
+
+    if (format === "png"){
+      const blob = dataUrlToBlob(out.toDataURL("image/png"));
+      downloadBlob(blob, `${baseName}.png`);
+      return;
+    }
+
+    if (format === "jpeg"){
+      const jpegDataUrl = canvasToJpegDataUrl(out, quality, ppi);
+      const blob = dataUrlToBlob(jpegDataUrl);
+      downloadBlob(blob, `${baseName}.jpg`);
+      return;
+    }
+
+    if (format === "pdf"){
+      const imgData = out.toDataURL("image/png");
+      if (!jsPDF) { alert("PDF export library not loaded. PNG and JPEG preview/export will still work."); return; }
+      const pdf = new jsPDF({
+        orientation: out.width >= out.height ? "landscape" : "portrait",
+        unit: "px",
+        format: [out.width, out.height]
+      });
+      pdf.addImage(imgData, "PNG", 0, 0, out.width, out.height);
+      pdf.save(`${baseName}.pdf`);
+    }
+  }
+
+  async function exportAllPresets(){
+    const format = els.format.value;
+    const ppi = parseInt(els.exportPpi.value, 10) || 75;
+    const renderScale = Math.max(1, ppi / 75);
+    const quality = Number(els.quality.value);
+
+    const zip = new JSZip();
+    const presetKeys = Object.keys(PRESETS);
+
+    for (const key of presetKeys){
+      const cfg = PRESETS[key];
+      const state = ensurePresetState(key);
+      const out = getRenderedCanvas(renderScale, key);
+      const baseRoot = (els.exportFileName.value || "creative_builder_export").trim().replace(/[\\/:*?"<>|]+/g, "_") || "creative_builder_export";
+      const baseName = `${baseRoot}_${cfg.name}_${state.w}x${state.h}_${ppi}ppi`;
+
+      if (format === "png"){
+        const blob = dataUrlToBlob(out.toDataURL("image/png"));
+        zip.file(`${baseName}.png`, blob);
+      }
+
+      if (format === "jpeg"){
+        const jpegDataUrl = canvasToJpegDataUrl(out, quality, ppi);
+        const blob = dataUrlToBlob(jpegDataUrl);
+        zip.file(`${baseName}.jpg`, blob);
+      }
+
+      if (format === "pdf"){
+        const imgData = out.toDataURL("image/png");
+        if (!jsPDF) { alert("PDF export library not loaded. PNG and JPEG preview/export will still work."); return; }
+      const pdf = new jsPDF({
+          orientation: out.width >= out.height ? "landscape" : "portrait",
+          unit: "px",
+          format: [out.width, out.height]
+        });
+        pdf.addImage(imgData, "PNG", 0, 0, out.width, out.height);
+        const pdfBlob = pdf.output("blob");
+        zip.file(`${baseName}.pdf`, pdfBlob);
+      }
+    }
+
+    const zipBlob = await zip.generateAsync({ type:"blob" });
+    downloadBlob(zipBlob, `creative-builder-all-presets-${format}.zip`);
+  }
+
+  els.quality.addEventListener("input", () => {
+    els.qLabel.textContent = Number(els.quality.value).toFixed(2);
+  });
+
+  els.unlockLayoutControls.addEventListener("change", () => {
+    updateLayoutControlsUI();
+    updateLockIcons();
+    draw();
+  });
+
+  els.unlockTypography.addEventListener("change", () => {
+    updateTypographyUI();
+    updateLockIcons();
+    if (!els.unlockTypography.checked){
+      applyTypographyForPreset(els.preset.value);
+    }
+    draw();
+  });
+
+  els.unlockNudges.addEventListener("change", () => {
+    updateNudgeUI();
+    updateLockIcons();
+    setNudgeButtonsDisabled(!els.unlockNudges.checked);
+    draw();
+  });
+
+  els.unlockImageShape.addEventListener("change", () => {
+    updateImageShapeUI();
+    updateLockIcons();
+    draw();
+  });
+
+  els.applyDefaults.addEventListener("click", () => {
+    applyDefaultStyleForPreset(els.preset.value);
+    saveCurrentPresetState();
+    draw();
+  });
+
+  els.preset.addEventListener("change", () => {
+    loadPresetStateIntoUI(els.preset.value);
+    setCanvasSize();
+    draw();
+  });
+
+  els.apply.addEventListener("click", () => {
+    saveCurrentPresetState();
+    setCanvasSize();
+    draw();
+  });
+
+  els.resetLayout.addEventListener("click", () => {
+    const preset = els.preset.value;
+    creativeLibrary[preset] = createDefaultCreativeState(preset);
+    saveLibraryToLocal();
+    loadPresetStateIntoUI(preset);
+    setCanvasSize();
+    draw();
+  });
+
+  els.exportBtn.addEventListener("click", exportCurrent);
+  els.exportAllBtn.addEventListener("click", exportAllPresets);
+
+  els.imgInput.addEventListener("change", (e) => {
+    const f = e.target.files?.[0];
+    if (!f) return;
+    const url = URL.createObjectURL(f);
+    const im = new Image();
+    im.onload = () => {
+      mainImg = im;
+      URL.revokeObjectURL(url);
+      draw();
+    };
+    im.src = url;
+  });
+
+  els.logoInput.addEventListener("change", (e) => {
+    const f = e.target.files?.[0];
+    if (!f) return;
+    const url = URL.createObjectURL(f);
+    const im = new Image();
+    im.onload = () => {
+      logoImg = im;
+      URL.revokeObjectURL(url);
+      draw();
+    };
+    im.src = url;
+  });
+
+  els.bgInput.addEventListener("change", (e) => {
+    const f = e.target.files?.[0];
+    if (!f) return;
+    const url = URL.createObjectURL(f);
+    const im = new Image();
+    im.onload = () => {
+      bgImage = im;
+      URL.revokeObjectURL(url);
+      draw();
+    };
+    im.src = url;
+  });
+
+  els.copySheetInput.addEventListener("change", (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (typeof XLSX === "undefined") {
+      updateCopySheetStatus("Excel reader could not load. Please check your internet connection and refresh.");
+      return;
+    }
+    readCopySheet(file);
+  });
+
+  els.copyKeywordSearch.addEventListener("input", () => {
+    populateBrandDropdown();
+  });
+
+  els.copyBrandSelect.addEventListener("change", () => {
+    autofillCopyFromSelection();
+  });
+
+  els.up.addEventListener("click", () => nudge(0, -step()));
+  els.down.addEventListener("click", () => nudge(0, step()));
+  els.left.addEventListener("click", () => nudge(-step(), 0));
+  els.right.addEventListener("click", () => nudge(step(), 0));
+  els.resetOne.addEventListener("click", resetOne);
+  els.resetNudges.addEventListener("click", resetAllNudges);
+
+  [
+    "w","h","template","align",
+
+    "copyKeywordSearch","copyBrandSelect",
+    "headerText","bodyText","ctaText",
+    "headerSize","bodySize","ctaSize",
+    "headerColor","bodyColor","ctaColor",
+
+    "imageShape",
+    "format","exportPpi",
+    "nudgeTarget","nudgeStep",
+    "defaultStyleMode"
+  ].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener("input", draw);
+    el.addEventListener("change", draw);
+  });
+
+  const ro = new ResizeObserver(() => fitPreviewToStage());
+  ro.observe(stage);
+
+  loadLibraryFromLocal();
+
+  Object.keys(PRESETS).forEach(p => ensurePresetState(p));
+
+  loadPresetStateIntoUI(els.preset.value);
+  setCanvasSize();
+  updateLogoLockInfo();
+  updateLayoutControlsUI();
+  updateTypographyUI();
+  updateNudgeUI();
+  updateImageShapeUI();
+  setNudgeButtonsDisabled(!els.unlockNudges.checked);
+  populateBrandDropdown();
+  draw();
+</script>
+
+</body></html>
